@@ -18,14 +18,14 @@ function addPoll(poll) {
   };
 }
 
-function savePollAnswer({ authUser, id, answer }) {
-  return {
-    type: SAVE_POLL_ANSWER,
-    authUser,
-    id,
-    answer
-  };
-}
+// function savePollAnswer({ authUser, id, answer }) {
+//   return {
+//     type: SAVE_POLL_ANSWER,
+//     authUser,
+//     id,
+//     answer
+//   };
+// }
 
 export function handleAddPoll(poll) {
   return async dispatch => {
