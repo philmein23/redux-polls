@@ -2,7 +2,9 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import Dashboard from "./Dashboard";
 import Navbar from "./Navbar";
+import Leaderboard from "./Leaderboard";
 import { handleInitialData } from "../actions/shared";
+import { LoadingBar } from "react-redux-loading";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
@@ -17,25 +19,16 @@ class App extends Component {
     const { loading } = this.props;
 
     return (
-      // <div className="container">
-      //   <Navbar />
-      //   {loading ? (
-      //     <h1>Loading..</h1>
-      //   ) : (
-      //     <div>
-      //       <Dashboard />
-      //     </div>
-      //   )}
-      // </div>
-      <Fragment>
+      <div>
+        <LoadingBar className="loading" />
+
         <Router>
           <div className="container">
             <Navbar />
-            {loading ? (
-              <h1>Loading...</h1>
-            ) : (
+            {loading ? null : (
               <Switch>
                 <Route path="/" exact component={Dashboard} />
+                <Route path="/leaderboard" exact component={Leaderboard} />
                 <Route
                   render={() => <h1 className="text-center">404 Error</h1>}
                 />
@@ -43,7 +36,7 @@ class App extends Component {
             )}
           </div>
         </Router>
-      </Fragment>
+      </div>
     );
   }
 }
