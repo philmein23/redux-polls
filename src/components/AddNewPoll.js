@@ -38,7 +38,6 @@ class AddNewPoll extends Component {
 
     const { question, a, b, c, d } = this.state;
 
-    console.log(this.props.dispatch);
     const poll = {
       question,
       a,
