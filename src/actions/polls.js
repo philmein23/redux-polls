@@ -30,8 +30,8 @@ function addPoll(poll) {
 export function handleAddPoll(poll) {
   return async dispatch => {
     try {
-      const { addedPoll } = await savePoll(poll);
-
+      const addedPoll  = await savePoll(poll);
+      
       dispatch(addPoll(addedPoll));
     } catch (reason) {
       console.error(reason);

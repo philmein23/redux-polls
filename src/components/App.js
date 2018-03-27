@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import Dashboard from "./Dashboard";
 import Navbar from "./Navbar";
 import Leaderboard from "./Leaderboard";
+import AddNewPoll from "./AddNewPoll";
 import { handleInitialData } from "../actions/shared";
 import { LoadingBar } from "react-redux-loading";
 
@@ -17,7 +18,6 @@ class App extends Component {
 
   render() {
     const { loading } = this.props;
-
     return (
       <div>
         <LoadingBar className="loading" />
@@ -28,7 +28,8 @@ class App extends Component {
             {loading ? null : (
               <Switch>
                 <Route path="/" exact component={Dashboard} />
-                <Route path="/leaderboard" exact component={Leaderboard} />
+                <Route path="/leaderboard" component={Leaderboard} />
+                <Route path="/addpoll" component={AddNewPoll} />
                 <Route
                   render={() => <h1 className="text-center">404 Error</h1>}
                 />

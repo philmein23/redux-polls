@@ -12,7 +12,7 @@ export default function Navbar() {
           <Link to="/leaderboard">Leaderboard</Link>
         </li>
         <li>
-          <Link to="/about">Add a Poll</Link>
+          <Link to="/addpoll">Add a Poll</Link>
         </li>
       </ul>
     </nav>
