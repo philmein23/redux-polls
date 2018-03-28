@@ -4,6 +4,7 @@ import Dashboard from "./Dashboard";
 import Navbar from "./Navbar";
 import Leaderboard from "./Leaderboard";
 import AddNewPoll from "./AddNewPoll";
+import Poll from "./Poll";
 import { handleInitialData } from "../actions/shared";
 import { LoadingBar } from "react-redux-loading";
 
@@ -28,6 +29,7 @@ class App extends Component {
             {loading ? null : (
               <Switch>
                 <Route path="/" exact component={Dashboard} />
+                <Route path="/poll/:pollId" component={Poll} />
                 <Route path="/leaderboard" component={Leaderboard} />
                 <Route path="/addpoll" component={AddNewPoll} />
                 <Route

@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 class Dashboard extends Component {
@@ -35,7 +36,17 @@ class Dashboard extends Component {
           {hasAnswered
             ? this.props.answered.map(answered => <li>{answered.question}</li>)
             : this.props.unanswered.map(unanswered => {
-                return <li>{unanswered.question} </li>;
+                return (
+                  <li>
+                    <Link
+                      to={{
+                        pathname: `/poll/${unanswered.id}`
+                      }}
+                    >
+                      {unanswered.question}
+                    </Link>
+                  </li>
+                );
               })}
         </ul>
         <div />
