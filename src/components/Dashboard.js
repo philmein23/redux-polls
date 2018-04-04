@@ -40,8 +40,7 @@ class Dashboard extends Component {
                   <li key={answered.id}>
                     <Link
                       to={{
-                        pathname: `/poll/${answered.id}`,
-                        state: { question: answered, hasAnswered: true }
+                        pathname: `/poll/${answered.id}`
                       }}
                     >
                       {answered.question}
@@ -54,8 +53,7 @@ class Dashboard extends Component {
                   <li key={unanswered.id}>
                     <Link
                       to={{
-                        pathname: `/poll/${unanswered.id}`,
-                        state: { question: unanswered, hasAnswered: false }
+                        pathname: `/poll/${unanswered.id}`
                       }}
                     >
                       {unanswered.question}

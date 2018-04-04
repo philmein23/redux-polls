@@ -20,10 +20,10 @@ function addPoll(poll) {
   };
 }
 
-function updatePollAnswer({ authUser, id, answer }) {
+function updatePollAnswer({ authedUser, id, answer }) {
   return {
     type: SAVE_POLL_ANSWER,
-    authUser,
+    authedUser,
     id,
     answer
   };
@@ -47,6 +47,7 @@ export function handleAddPoll(poll) {
 }
 
 export function handleSavePollAnswer(poll) {
+  console.log("poll2", poll);
   return async dispatch => {
     await savePollAnswer(poll);
 
