@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 
 class Dashboard extends Component {
   state = {
-    hasAnswered: false
+    hasAnswered: false,
+    showTest: false
   };
 
   toggle = (hasAnswered = false) => {
@@ -34,13 +35,27 @@ class Dashboard extends Component {
         </div>
         <ul className="dashboard-list">
           {hasAnswered
-            ? this.props.answered.map(answered => <li>{answered.question}</li>)
-            : this.props.unanswered.map(unanswered => {
+            ? this.props.answered.map(answered => {
                 return (
-                  <li>
+                  <li key={answered.id}>
                     <Link
                       to={{
-                        pathname: `/poll/${unanswered.id}`
+                        pathname: `/poll/${answered.id}`,
+                        state: { question: answered, hasAnswered: true }
+                      }}
+                    >
+                      {answered.question}
+                    </Link>
+                  </li>
+                );
+              })
+            : this.props.unanswered.map(unanswered => {
+                return (
+                  <li key={unanswered.id}>
+                    <Link
+                      to={{
+                        pathname: `/poll/${unanswered.id}`,
+                        state: { question: unanswered, hasAnswered: false }
                       }}
                     >
                       {unanswered.question}
@@ -69,7 +84,8 @@ function mapStateToProps({ authedUser, polls, users }) {
 
   return {
     answered,
-    unanswered
+    unanswered,
+    users
   };
 }
 

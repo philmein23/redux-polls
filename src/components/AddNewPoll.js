@@ -106,6 +106,10 @@ class AddNewPoll extends Component {
   }
 }
 
-function mapStateToProps() {}
+function mapStateToProps({ authedUser }) {
+  return {
+    authedUser
+  };
+}
 
 export default connect(mapStateToProps)(AddNewPoll);

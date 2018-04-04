@@ -1,4 +1,6 @@
 import { savePoll, savePollAnswer } from "../utils/api";
+import { showLoading, hideLoading } from "react-redux-loading";
+import { updateUserPolls } from "./users";
 
 export const ADD_POLL = "ADD_POLL";
 export const SAVE_POLL_ANSWER = "SAVE_POLL_ANSWER";
@@ -18,21 +20,26 @@ function addPoll(poll) {
   };
 }
 
-// function savePollAnswer({ authUser, id, answer }) {
-//   return {
-//     type: SAVE_POLL_ANSWER,
-//     authUser,
-//     id,
-//     answer
-//   };
-// }
+function updatePollAnswer({ authUser, id, answer }) {
+  return {
+    type: SAVE_POLL_ANSWER,
+    authUser,
+    id,
+    answer
+  };
+}
 
 export function handleAddPoll(poll) {
-  return async dispatch => {
+  return async (dispatch, getState) => {
     try {
-      const addedPoll  = await savePoll(poll);
-      
+      const { authedUser } = getState();
+
+      dispatch(showLoading());
+      const addedPoll = await savePoll({ ...poll, author: authedUser });
+
       dispatch(addPoll(addedPoll));
+
+      dispatch(hideLoading());
     } catch (reason) {
       console.error(reason);
     }
@@ -42,5 +49,7 @@ export function handleAddPoll(poll) {
 export function handleSavePollAnswer(poll) {
   return async dispatch => {
     await savePollAnswer(poll);
+
+    dispatch(updatePollAnswer(poll));
   };
 }

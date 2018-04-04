@@ -6,7 +6,7 @@ export default function polls(state = {}, action) {
   }
 
   if (action.type === ADD_POLL) {
-    return { ...state, [action.poll.id]: { ...action.poll } };
+    return { ...state, [action.poll.id]: action.poll };
   }
 
   if (action.type === SAVE_POLL_ANSWER) {
