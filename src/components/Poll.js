@@ -3,18 +3,15 @@ import { connect } from "react-redux";
 import { handleSavePollAnswer } from "../actions/polls";
 
 class Poll extends Component {
-  state = {
-    hasAnswered: false
-  };
-
   getTotal = key => {
     const { poll } = this.props;
 
-    const totalVotes =
-      poll.aVotes.length +
-      poll.bVotes.length +
-      poll.cVotes.length +
-      poll.dVotes.length;
+    const totalVotes = ["aVotes", "bVotes", "cVotes", "dVotes"].reduce(
+      (total, key) => {
+        return total + poll[key].length;
+      },
+      0
+    );
 
     const percentage = Math.floor(
       poll[`${key}Votes`].length / totalVotes * 100
@@ -26,13 +23,11 @@ class Poll extends Component {
   selectAnswer = answer => {
     const { poll, authedUser, vote } = this.props;
 
-    if (vote) return;
+    this.answered = true;
 
     this.props.dispatch(
       handleSavePollAnswer({ authedUser, id: poll.id, answer })
     );
-
-    this.setState({ hasAnswered: true });
   };
 
   render() {
@@ -54,7 +49,9 @@ class Poll extends Component {
           {["aText", "bText", "cText", "dText"].map(key => (
             <li
               key={key}
-              onClick={() => this.selectAnswer(key[0])}
+              onClick={() =>
+                !vote && !this.answered && this.selectAnswer(key[0])
+              }
               className={`option ${vote === key[0] ? "chosen" : ""}`}
             >
               <div className="result">

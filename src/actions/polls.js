@@ -1,6 +1,5 @@
 import { savePoll, savePollAnswer } from "../utils/api";
 import { showLoading, hideLoading } from "react-redux-loading";
-import { updateUserPolls } from "./users";
 
 export const ADD_POLL = "ADD_POLL";
 export const SAVE_POLL_ANSWER = "SAVE_POLL_ANSWER";
@@ -47,7 +46,6 @@ export function handleAddPoll(poll) {
 }
 
 export function handleSavePollAnswer(poll) {
-  console.log("poll2", poll);
   return async dispatch => {
     await savePollAnswer(poll);
 

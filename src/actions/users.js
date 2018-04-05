@@ -7,11 +7,3 @@ export function receiveUsers(users) {
     users
   };
 }
-
-export function updateUserPolls({ authedUser, id }) {
-  return {
-    type: UPDATE_USER_POLLS,
-    authedUser,
-    id
-  };
-}
